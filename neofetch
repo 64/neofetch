@@ -28,6 +28,14 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+ps() {
+	echo "hello"
+}
+
+gsettings() {
+	echo "none"
+}
+
 version=7.1.0
 
 # Fallback to a value of '5' for shells which support bash
@@ -62,17 +70,17 @@ print_info() {
     info "Uptime" uptime
     info "Packages" packages
     info "Shell" shell
-    info "Resolution" resolution
+    # info "Resolution" resolution
     info "DE" de
     info "WM" wm
     info "WM Theme" wm_theme
     info "Theme" theme
     info "Icons" icons
-    info "Terminal" term
-    info "Terminal Font" term_font
-    info "CPU" cpu
-    info "GPU" gpu
-    info "Memory" memory
+    # info "Terminal" term
+    # info "Terminal Font" term_font
+    # info "CPU" cpu
+    # info "GPU" gpu
+    # info "Memory" memory
 
     # info "GPU Driver" gpu_driver  # Linux/macOS only
     # info "Disk" disk
@@ -1416,7 +1424,7 @@ get_kernel() {
 get_uptime() {
     # Get uptime in seconds.
     case $os in
-        Linux|Windows|MINIX)
+        Linux|Windows|MINIX|Managarm)
             if [[ -r /proc/uptime ]]; then
                 s=$(< /proc/uptime)
                 s=${s/.*}
@@ -8147,19 +8155,19 @@ EOF
 
         "Managarm"*)
             # TODO: Add proper art
-            set_colors 2 1 3 5
+            set_colors 6 7
             read -rd '' ascii_data <<'EOF'
-                   @@. @@                         
+${c1}                   @@. @@                         
                    %%%@@%@                        
-                 &%%@%&%%%.                       
-                @%%@@%%%%%@%@@@@/                 
-               %%%@@@%%%%%%%%%%%%%%@              
-          #@%%%%%%%%%%%%%%@@@@@@@@%%%@            
-      @%%%%%%%%%%%%%%%%%@@@@@@@@&%%%@@@%%%&@@     
-    @@%@@%%%%%%%%%%%%%%@@@@@@@@@@@@@@@@@@@@@@@%%%@
-   @%%%%%%%%%%%%%%%%%%%@@@@@@@@@@@@@@@@@@@@@@@@%@ 
-  @  @%%%%%%%%%%%%%%%%%%@@@@@@@@@@@@@@@@@@@@@%%@  
-  @%%%%%%%%%%%%%%%%%%%%%@@@@@@@@@@@%%%%%%%%%@%    
+                 &%%${c2}@${c1}%&%%%.                       
+                @%%${c2}@@${c1}%%%%%@%@@@@/                 
+               %%%${c2}@@@${c1}%%%%%%%%%%%%%%@              
+          #@%%%%%%%%%%%%%%${c2}@@@@@@@@${c1}%%%${c2}@${c1}            
+      @%%%%%%%%%%%%%%%%%${c2}@@@@@@@@${c1}&%%%${c2}@@@${c1}%%%&@@     
+    @@%@@%%%%%%%%%%%%%%${c2}@@@@@@@@@@@@@@@@@@@@@@@${c1}%%%@
+   @%%%%%%%%%%%%%%%%%%%${c2}@@@@@@@@@@@@@@@@@@@@@@@@${c1}%@ 
+  @  @%%%%%%%%%%%%%%%%%%${c2}@@@@@@@@@@@@@@@@@@@@@${c1}%%@  
+  @%%%%%%%%%%%%%%%%%%%%%${c2}@@@@@@@@@@@${c1}%%%%%%%%%@%    
  @. @%%%%%%%%%%%%%%%%%%%%%%%%%%%%%@@@.            
     @%%%%%%&@@@@(///#@@@%,
 EOF
